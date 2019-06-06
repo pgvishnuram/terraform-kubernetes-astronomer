@@ -1,15 +1,15 @@
 variable "db_connection_string" {
-  type    = "string"
+  type        = "string"
   description = "Should look something like this - postgres://username:password@endpoint:port"
 }
 
 variable "tls_cert" {
-  type    = "string"
+  type        = "string"
   description = "The signed certificate for the Astronomer Load Balancer. It should be signed by a certificate authorize and should have common name *.base_domain"
 }
 
 variable "tls_key" {
-  type    = "string"
+  type        = "string"
   description = "The private key corresponding to the signed certificate tls_cert."
 }
 

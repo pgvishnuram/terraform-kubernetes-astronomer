@@ -1,14 +1,15 @@
 resource "kubernetes_namespace" "istio_system" {
-  count      = "${var.enable_istio == "true" ? 1 : 0}"
+  count = "${var.enable_istio == "true" ? 1 : 0}"
+
   metadata {
     name = "istio-system"
   }
 }
 
 data "helm_repository" "istio_repo" {
-  count      = "${var.enable_istio == "true" ? 1 : 0}"
-  name = "istio.io"
-  url  = "https://storage.googleapis.com/istio-release/releases/${var.istio_helm_release_version}/charts/"
+  count = "${var.enable_istio == "true" ? 1 : 0}"
+  name  = "istio.io"
+  url   = "https://storage.googleapis.com/istio-release/releases/${var.istio_helm_release_version}/charts/"
 }
 
 resource "helm_release" "istio_init" {
@@ -31,5 +32,15 @@ resource "helm_release" "istio" {
   set {
     name  = "kiali.enabled"
     value = "true"
+  }
+
+  set {
+    name  = "grafana.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "grafana.service.type"
+    value = "LoadBalancer"
   }
 }

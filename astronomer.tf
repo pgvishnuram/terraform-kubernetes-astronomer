@@ -52,12 +52,12 @@ resource "helm_release" "astronomer" {
   # istio needs to be deployed first
   depends_on = ["helm_release.istio"]
 
-  name      = "astronomer"
-  version   = "${var.astronomer_version}"
-  chart     = "astronomer"
+  name       = "astronomer"
+  version    = "${var.astronomer_version}"
+  chart      = "astronomer"
   repository = "${data.helm_repository.astronomer_repo.name}"
-  namespace = "${kubernetes_namespace.astronomer.metadata.name}"
-  wait      = true
+  namespace  = "${kubernetes_namespace.astronomer.metadata.name}"
+  wait       = true
 
   values = [<<EOF
 ---
