@@ -32,6 +32,16 @@ variable "istio_helm_release_version" {
   type    = "string"
 }
 
+variable "kiali_username" {
+  type        = "string"
+  description = "Kiali dashboard username."
+}
+
+variable "kiali_passphrase" {
+  type        = "string"
+  description = "Kiali dashboard passphrase."
+}
+
 variable "astronomer_version" {
   default = "v0.9.0"
   type    = "string"

@@ -21,8 +21,8 @@ resource "kubernetes_secret" "kiali" {
   type = "kubernetes.io/opaque"
 
   data {
-    "username"   = "${base64encode(string)}"
-    "passphrase" = "${base64encode(string)}"
+    "username"   = "${base64encode(var.kiali_username)}"
+    "passphrase" = "${base64encode(var.kiali_passphrase)}"
   }
 }
 
