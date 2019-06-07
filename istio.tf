@@ -6,6 +6,26 @@ resource "kubernetes_namespace" "istio_system" {
   }
 }
 
+resource "kubernetes_secret" "kiali" {
+  depends_on = ["kubernetes_namespace.istio_system"]
+
+  metadata {
+    name      = "kiali"
+    namespace = "istio_system"
+
+    labels {
+      app = "kiali"
+    }
+  }
+
+  type = "kubernetes.io/opaque"
+
+  data {
+    "username"   = "${base64encode(string)}"
+    "passphrase" = "${base64encode(string)}"
+  }
+}
+
 data "helm_repository" "istio_repo" {
   count = "${var.enable_istio == "true" ? 1 : 0}"
   name  = "istio.io"
